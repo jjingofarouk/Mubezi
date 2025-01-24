@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,20 +15,20 @@
 
         /* Body Styling */
         body {
-            background-color: #f5f5f5;
+            background-color: #075e54; /* WhatsApp green background */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
         /* Chat Container */
         .chat-container {
-            width: 400px;
-            height: 600px;
+            width: 100%;
+            height: 100vh;
+            max-width: 500px; /* Max width for larger screens */
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -36,10 +36,16 @@
 
         /* Chat Header */
         .chat-header {
-            background-color: #075e54;
+            background-color: #075e54; /* WhatsApp green header */
             color: #fff;
             padding: 15px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-header h1 {
             font-size: 18px;
             font-weight: bold;
         }
@@ -47,23 +53,26 @@
         /* Chat Box */
         .chat-box {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             overflow-y: auto;
-            background-color: #ece5dd;
+            background-color: #ece5dd; /* WhatsApp chat background */
+            display: flex;
+            flex-direction: column;
         }
 
         /* Message Styling */
         .message {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
         }
 
         .message p {
             max-width: 70%;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
             font-size: 14px;
             line-height: 1.5;
+            word-wrap: break-word;
         }
 
         /* User Message */
@@ -72,8 +81,9 @@
         }
 
         .message.user p {
-            background-color: #dcf8c6;
+            background-color: #dcf8c6; /* WhatsApp user message color */
             color: #000;
+            border-radius: 8px 8px 0 8px;
         }
 
         /* Bot Message */
@@ -82,8 +92,9 @@
         }
 
         .message.bot p {
-            background-color: #fff;
+            background-color: #fff; /* WhatsApp bot message color */
             color: #000;
+            border-radius: 8px 8px 8px 0;
         }
 
         /* Input Area */
@@ -91,7 +102,7 @@
             display: flex;
             border-top: 1px solid #ddd;
             background-color: #fff;
-            padding: 10px;
+            padding: 8px;
         }
 
         .input-area input {
@@ -101,21 +112,25 @@
             border-radius: 20px;
             outline: none;
             font-size: 14px;
+            margin-right: 8px;
         }
 
         .input-area button {
-            background-color: #075e54;
+            background-color: #075e54; /* WhatsApp green button */
             color: #fff;
             border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            margin-left: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 18px;
         }
 
         .input-area button:hover {
-            background-color: #054d43;
+            background-color: #054d43; /* Darker green on hover */
         }
 
         /* Scrollbar Styling */
@@ -131,6 +146,13 @@
         .chat-box::-webkit-scrollbar-track {
             background-color: #f1f1f1;
         }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .chat-container {
+                border-radius: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,7 +160,7 @@
     <div class="chat-container">
         <!-- Chat Header -->
         <div class="chat-header">
-            ChatBot
+            <h1>ChatBot</h1>
         </div>
 
         <!-- Chat Box -->
@@ -149,7 +171,7 @@
         <!-- Input Area -->
         <div class="input-area">
             <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="send-btn">Send</button>
+            <button id="send-btn">➤</button>
         </div>
     </div>
 
