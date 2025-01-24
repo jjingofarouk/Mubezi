@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ssuubi - ChatBot</title>
     <style>
         /* General Reset */
@@ -14,26 +14,53 @@
         }
 
         /* Body Styling */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
         body {
             background-color: #075e54; /* WhatsApp green background */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Prevent scrolling */
+            min-height: 100vh;
         }
 
         /* Chat Container */
         .chat-container {
-            width: 100vw; /* Full viewport width */
-            height: 100vh; /* Full viewport height */
-            max-width: 500px; /* Max width for larger screens */
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
             background-color: #fff;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            position: relative; /* For absolute positioning of elements */
+            position: relative;
+            margin: 0 auto;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 600px) {
+            .chat-container {
+                width: 100%;
+                height: 100vh;
+                max-width: none;
+                margin: 0;
+            }
+
+            .input-area {
+                padding: 8px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                z-index: 1000;
+            }
         }
 
         /* Chat Header */
@@ -45,9 +72,9 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            position: sticky; /* Stick to the top */
-            top: 0; /* Always stay at the top */
-            z-index: 1; /* Ensure it's above the chat box */
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .chat-header h1 {
@@ -72,17 +99,19 @@
         .chat-box {
             flex: 1;
             padding: 10px;
-            overflow-y: auto; /* Enable vertical scrolling */
-            background-color: #ece5dd; /* WhatsApp chat background */
+            overflow-y: auto;
+            background-color: #ece5dd;
             display: flex;
             flex-direction: column;
-            padding-bottom: 70px; /* Space for the input area */
+            padding-bottom: 80px;
+            overscroll-behavior-y: contain;
         }
 
         /* Message Styling */
         .message {
             margin-bottom: 10px;
             display: flex;
+            width: 100%;
         }
 
         .message p {
@@ -100,7 +129,7 @@
         }
 
         .message.user p {
-            background-color: #dcf8c6; /* WhatsApp user message color */
+            background-color: #dcf8c6;
             color: #000;
             border-radius: 8px 8px 0 8px;
         }
@@ -111,7 +140,7 @@
         }
 
         .message.bot p {
-            background-color: #fff; /* WhatsApp bot message color */
+            background-color: #fff;
             color: #000;
             border-radius: 8px 8px 8px 0;
         }
@@ -123,11 +152,13 @@
             background-color: #fff;
             padding: 8px;
             align-items: center;
-            position: fixed; /* Fixed position */
-            bottom: 0; /* Stick to the bottom */
-            left: 0; /* Align to the left */
-            right: 0; /* Align to the right */
-            z-index: 2; /* Ensure it's above the chat box */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .input-area input {
@@ -140,47 +171,9 @@
             margin-right: 8px;
         }
 
-        /* Voice Recording Button */
-        .voice-record-button {
-            background-color: #075e54;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            margin-right: 8px;
-        }
-
-        .voice-record-button:hover {
-            background-color: #054d43; /* Darker green on hover */
-        }
-
-        /* Photo Upload Button */
-        .photo-upload-button {
-            background-color: #075e54;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            margin-right: 8px;
-        }
-
-        .photo-upload-button:hover {
-            background-color: #054d43; /* Darker green on hover */
-        }
-
-        /* Send Button */
+        /* Buttons */
+        .voice-record-button, 
+        .photo-upload-button, 
         .send-button {
             background-color: #075e54;
             color: #fff;
@@ -193,10 +186,14 @@
             justify-content: center;
             cursor: pointer;
             font-size: 18px;
+            margin-right: 8px;
+            flex-shrink: 0;
         }
 
+        .voice-record-button:hover, 
+        .photo-upload-button:hover, 
         .send-button:hover {
-            background-color: #054d43; /* Darker green on hover */
+            background-color: #054d43;
         }
 
         /* Scrollbar Styling */
@@ -211,6 +208,11 @@
 
         .chat-box::-webkit-scrollbar-track {
             background-color: #f1f1f1;
+        }
+
+        /* Prevent text zoom on mobile */
+        input, button {
+            font-size: 16px;
         }
     </style>
 </head>
