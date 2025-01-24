@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatBot</title>
+    <title>Ssuubi - ChatBot</title>
     <style>
         /* General Reset */
         * {
@@ -21,17 +21,19 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         /* Chat Container */
         .chat-container {
-            width: 100%;
-            height: 100vh;
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
             max-width: 500px; /* Max width for larger screens */
             background-color: #fff;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            position: relative; /* For absolute positioning of elements */
         }
 
         /* Chat Header */
@@ -48,6 +50,19 @@
         .chat-header h1 {
             font-size: 18px;
             font-weight: bold;
+        }
+
+        /* Audio Call Button */
+        .audio-call-button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .audio-call-button:hover {
+            opacity: 0.8;
         }
 
         /* Chat Box */
@@ -103,6 +118,7 @@
             border-top: 1px solid #ddd;
             background-color: #fff;
             padding: 8px;
+            align-items: center;
         }
 
         .input-area input {
@@ -115,8 +131,49 @@
             margin-right: 8px;
         }
 
-        .input-area button {
-            background-color: #075e54; /* WhatsApp green button */
+        /* Voice Recording Button */
+        .voice-record-button {
+            background-color: #075e54;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .voice-record-button:hover {
+            background-color: #054d43; /* Darker green on hover */
+        }
+
+        /* Photo Upload Button */
+        .photo-upload-button {
+            background-color: #075e54;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .photo-upload-button:hover {
+            background-color: #054d43; /* Darker green on hover */
+        }
+
+        /* Send Button */
+        .send-button {
+            background-color: #075e54;
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -129,7 +186,7 @@
             font-size: 18px;
         }
 
-        .input-area button:hover {
+        .send-button:hover {
             background-color: #054d43; /* Darker green on hover */
         }
 
@@ -146,13 +203,6 @@
         .chat-box::-webkit-scrollbar-track {
             background-color: #f1f1f1;
         }
-
-        /* Responsive Design */
-        @media (max-width: 500px) {
-            .chat-container {
-                border-radius: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -160,7 +210,9 @@
     <div class="chat-container">
         <!-- Chat Header -->
         <div class="chat-header">
-            <h1>ChatBot</h1>
+            <h1>Ssuubi - Hope</h1>
+            <!-- Audio Call Button -->
+            <button class="audio-call-button">📞</button>
         </div>
 
         <!-- Chat Box -->
@@ -170,8 +222,14 @@
 
         <!-- Input Area -->
         <div class="input-area">
+            <!-- Voice Recording Button -->
+            <button class="voice-record-button">🎤</button>
+            <!-- Photo Upload Button -->
+            <button class="photo-upload-button">📷</button>
+            <!-- Text Input -->
             <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="send-btn">➤</button>
+            <!-- Send Button -->
+            <button id="send-btn" class="send-button">➤</button>
         </div>
     </div>
 
